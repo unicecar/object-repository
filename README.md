@@ -1,11 +1,13 @@
 # Guía de uso de ObjectRepository en NetBeans
 
-**Público:** estudiantes de segundo semestre de Ingeniería de Sistemas  
-**Entorno de trabajo:** Apache NetBeans, proyecto Java con Ant y JDK 21.  
-**Versión de la clase:** 2  
-**Autor:** José David Ríos Pacheco ([LinkedIn](https://www.linkedin.com/in/joseriospacheco/))  
-**Contribuidor del proyecto:** Namuel Francisco Solórzano Peralta ([LinkedIn](https://www.linkedin.com/in/namuel-francisco-sol%C3%B3rzano-peralta-a728a240/))  
-**Archivo de referencia:** [ObjectRepository.java](src/co/edu/cecar/app/repository/ObjectRepository.java)
+**Público:** estudiantes de segundo semestre de Ingeniería de Sistemas\
+**Entorno de trabajo:** Apache NetBeans, proyecto Java con Ant y JDK 21.\
+**Versión de la clase:** 2\
+**Paquete de la biblioteca:** `co.edu.cecar.objectrepository`\
+**Autor:** José David Ríos Pacheco ([LinkedIn](https://www.linkedin.com/in/joseriospacheco/))\
+**Contribuidor del proyecto:** Namuel Francisco Solórzano Peralta ([LinkedIn](https://www.linkedin.com/in/namuel-francisco-sol%C3%B3rzano-peralta-a728a240/))\
+**Archivo de referencia:** [ObjectRepository.java](src/co/edu/cecar/objectrepository/ObjectRepository.java)\
+**Clase compilada (Java 21 o superior):** [object-repository-2.0.0.jar](dist/object-repository-2.0.0.jar)
 
 ## Institución
 
@@ -69,7 +71,7 @@ Esta organización permite reutilizar el mismo servicio desde una consola o una 
 
 Trabajaremos desde las ventanas y menús de **NetBeans**. Ten instalado **JDK 21** para el proyecto. Los nombres de los menús se muestran en inglés, como aparecen habitualmente en el IDE.
 
-La carpeta `D:\Desarrollos\Java\object-repository` contiene esta guía y la clase proporcionada. Crearás tu aplicación de práctica con el nombre **PracticaEstudiantes**.
+La carpeta `D:\Desarrollos\Java\object-repository` contiene esta guía, el código fuente y el compilado JAR de la clase. Crearás tu aplicación de práctica con el nombre **PracticaEstudiantes**.
 
 ### 2.1. Crear el proyecto
 
@@ -98,38 +100,79 @@ Para cada paquete restante, haz clic derecho sobre **Source Packages → New →
 - `co.edu.cecar.app.service`
 - `co.edu.cecar.app.repository`
 
-### 2.4. Crear las clases
+### 2.4. Elegir cómo agregar ObjectRepository
 
-Haz clic derecho sobre el paquete correspondiente y selecciona **New → Java Class**. Escribe el nombre de la clase sin `.java` y pulsa **Finish**.
+Puedes usar la clase de dos formas. **Elige una sola opción para tu proyecto de práctica.**
+
+| Opción | Cuándo usarla |
+|---|---|
+| **A. Agregar el JAR compilado** | Recomendada para empezar a trabajar en la lógica de negocio. |
+| **B. Copiar el código fuente** | Para estudiar cómo funciona la persistencia o proponer mejoras a la clase. |
+
+Un **JAR** es un archivo que agrupa clases Java ya compiladas. Este proyecto incluye [object-repository-2.0.0.jar](dist/object-repository-2.0.0.jar), preparado para **Java 21 o superior**, con `ObjectRepository`, sus excepciones, filtros y páginas. Se utiliza como biblioteca desde tu aplicación; no se ejecuta con doble clic.
+
+#### Opción A. Agregar el JAR al proyecto de NetBeans
+
+1. Obtén el archivo [object-repository-2.0.0.jar](dist/object-repository-2.0.0.jar). Si consultas la guía en GitHub, abre ese enlace y usa **Download raw file** para descargarlo. También viene en `dist` si descargaste el repositorio completo.
+2. Dentro de la carpeta de tu proyecto **PracticaEstudiantes**, crea una carpeta llamada `lib` usando el Explorador de archivos y copia allí el JAR. Así la biblioteca queda junto a tu proyecto.
+3. En NetBeans, haz clic derecho sobre **PracticaEstudiantes → Properties → Libraries**.
+4. En **Compile**, selecciona **Classpath** si aparece esa lista, y pulsa **Add JAR/Folder**. Selecciona el JAR que copiaste a `PracticaEstudiantes/lib`.
+5. Confirma con **Open** y **OK**. La biblioteca aparecerá bajo **Libraries** en **Projects**.
+
+Ya puedes continuar con las clases de esta guía. **No crees una clase `ObjectRepository.java` en tu proyecto cuando elijas el JAR**: NetBeans encontrará esa clase en la biblioteca. Sí debes crear `EstudianteRepository`, que la extiende.
+
+El paquete de la biblioteca es `co.edu.cecar.objectrepository`. Para utilizar la clase, importa también su nombre:
+
+```java
+import co.edu.cecar.objectrepository.ObjectRepository;
+```
+
+`co.edu.cecar.objectrepository` es el nombre del paquete; `ObjectRepository` es la clase que vas a utilizar. Por eso debes escribir el import completo que aparece arriba.
+
+Tu clase `EstudianteRepository` sigue en `co.edu.cecar.app.repository` y utiliza la biblioteca mediante ese import. Las entidades, el servicio y la UI mantienen sus paquetes de la aplicación.
+
+**Si ya habías agregado el JAR anterior:** reemplaza el archivo dentro de `PracticaEstudiantes/lib`. Si NetBeans conserva una referencia al anterior, retírala desde **Properties → Libraries** y agrega el JAR actualizado. Cambia los imports al nuevo paquete y ejecuta **Clean and Build** antes de volver a ejecutar `App`.
+
+También están disponibles `ObjectRepository.Page` y sus excepciones. Al seguir esta opción no necesitas agregar dependencias adicionales a las del JDK. [Referencia: bibliotecas y classpath en proyectos de NetBeans](https://docs.oracle.com/netbeans/nb82/netbeans/NBDAG/create_japps.htm).
+
+#### Opción B. Incorporar el código fuente
+
+Crea un paquete llamado `co.edu.cecar.objectrepository` y, dentro de él, una clase llamada **ObjectRepository** mediante **New → Java Class**. Abre la [clase proporcionada](src/co/edu/cecar/objectrepository/ObjectRepository.java), copia todo su contenido y pégalo reemplazando el contenido generado por NetBeans. Guarda el archivo. En esta opción no agregues el JAR de la opción A.
+
+Si modificas el código fuente, el JAR distribuido no cambia automáticamente: para distribuir tus cambios necesitarás generar una nueva compilación.
+
+### 2.5. Crear las clases de tu aplicación
+
+Haz clic derecho sobre cada paquete y selecciona **New → Java Class**. Escribe el nombre de la clase sin `.java` y pulsa **Finish**.
 
 | Paquete | Clases |
 |---|---|
 | `co.edu.cecar.app.ui` | `App` — creada por el asistente |
 | `co.edu.cecar.app.entities` | `Estudiante` |
 | `co.edu.cecar.app.service` | `EstudianteService` |
-| `co.edu.cecar.app.repository` | `ObjectRepository` y `EstudianteRepository` |
+| `co.edu.cecar.app.repository` | `EstudianteRepository` |
+| `co.edu.cecar.objectrepository` | `ObjectRepository`, solo si elegiste copiar el código fuente |
 
-Para completar **ObjectRepository**, abre la [clase proporcionada](src/co/edu/cecar/app/repository/ObjectRepository.java) y copia todo su contenido. Pégalo reemplazando todo el texto de la clase `ObjectRepository` que acabas de crear en NetBeans. Guarda el archivo.
+Completa las clases con los ejemplos de las siguientes secciones. Cada bloque incluye `package`, los imports y la clase completa: reemplaza el contenido generado por NetBeans para evitar repetir esas partes. Es normal que aparezcan errores de referencias mientras todavía falten clases por completar.
 
-Completa las otras clases con los ejemplos de las siguientes secciones. Cada bloque incluye la línea `package`, los imports y la clase completa: reemplaza el contenido generado por NetBeans para evitar repetir esas partes. Es normal que aparezcan errores de referencias mientras todavía falten clases por completar.
-
-Así verás la organización en **Projects**:
+Con la opción del JAR, tu proyecto tendrá esta organización:
 
 ```text
 PracticaEstudiantes
-└── Source Packages
-    ├── co.edu.cecar.app.ui
-    │   └── App.java
-    ├── co.edu.cecar.app.entities
-    │   └── Estudiante.java
-    ├── co.edu.cecar.app.service
-    │   └── EstudianteService.java
-    └── co.edu.cecar.app.repository
-        ├── ObjectRepository.java
-        └── EstudianteRepository.java
+├── Source Packages
+│   ├── co.edu.cecar.app.ui
+│   │   └── App.java
+│   ├── co.edu.cecar.app.entities
+│   │   └── Estudiante.java
+│   ├── co.edu.cecar.app.service
+│   │   └── EstudianteService.java
+│   └── co.edu.cecar.app.repository
+│       └── EstudianteRepository.java
+└── Libraries
+    └── object-repository-2.0.0.jar
 ```
 
-NetBeans crea las carpetas correspondientes a cada paquete. Utiliza **Projects** para navegar entre las clases y **Files** para ver los archivos del proyecto.
+Si elegiste el código fuente, verás además el paquete `co.edu.cecar.objectrepository` con `ObjectRepository.java`. El repositorio de estudiantes permanece en `co.edu.cecar.app.repository`. NetBeans crea las carpetas correspondientes a cada paquete. Utiliza **Projects** para navegar entre las clases y **Files** para ver los archivos del proyecto.
 
 ## 3. Crear la entidad `Estudiante`
 
@@ -196,6 +239,7 @@ Abre **co.edu.cecar.app.repository → EstudianteRepository.java** y reemplaza s
 package co.edu.cecar.app.repository;
 
 import co.edu.cecar.app.entities.Estudiante;
+import co.edu.cecar.objectrepository.ObjectRepository;
 
 public class EstudianteRepository extends ObjectRepository<Estudiante, Integer> {
     public EstudianteRepository() {
@@ -276,8 +320,8 @@ package co.edu.cecar.app.ui;
 
 import co.edu.cecar.app.entities.Estudiante;
 import co.edu.cecar.app.service.EstudianteService;
-import co.edu.cecar.app.repository.ObjectRepository.DuplicateEntityException;
-import co.edu.cecar.app.repository.ObjectRepository.StorageException;
+import co.edu.cecar.objectrepository.ObjectRepository.DuplicateEntityException;
+import co.edu.cecar.objectrepository.ObjectRepository.StorageException;
 
 public class App {
     public static void main(String[] args) {
@@ -345,7 +389,7 @@ La ruta `data/estudiantes.bin` depende de la carpeta de trabajo. Si los archivos
 | Lo que ves en NetBeans | Qué revisar |
 |---|---|
 | `No main classes found` | Comprueba que `App` tenga el método `public static void main(String[] args)` completo. |
-| `package ... does not exist` | Comprueba que creaste todos los paquetes y pegaste las clases completas en ellos. |
+| `package ... does not exist` | Comprueba los paquetes e imports. Si elegiste el JAR, revisa que esté agregado en Libraries; si elegiste el código fuente, comprueba que copiaste la clase completa. |
 | `cannot find symbol` | Revisa el nombre de la clase o método señalado y que su import esté escrito al inicio del archivo. |
 | Error de versión de Java | Revisa que el proyecto tenga JDK 21 y formato de código fuente 21 en sus propiedades. |
 | Se ejecuta otra clase | En **Properties → Run → Main Class**, selecciona `co.edu.cecar.app.ui.App`. |
@@ -356,7 +400,7 @@ Lee el primer error de **Output**, corrígelo y vuelve a ejecutar. Para reconstr
 
 Las secciones 6 a 9 explican los métodos que puedes utilizar **dentro de los métodos de `EstudianteService`**, donde ya existe el campo `repo`. Son fragmentos para estudiar uno por uno: adapta su resultado con `return` y recíbelo en la UI. Los `System.out.println` de estos fragmentos ilustran qué información se puede mostrar; en tu aplicación colócalos en `App`.
 
-En NetBeans, edita los métodos desde la clase abierta en el editor. Los imports van al principio del archivo Java, después de `package`, nunca dentro de un método. Según el fragmento, necesitarás `java.util.List`, `java.util.Optional`, `java.util.Comparator` y `co.edu.cecar.app.repository.ObjectRepository.Page`.
+En NetBeans, edita los métodos desde la clase abierta en el editor. Los imports van al principio del archivo Java, después de `package`, nunca dentro de un método. Según el fragmento, necesitarás `java.util.List`, `java.util.Optional`, `java.util.Comparator` y `co.edu.cecar.objectrepository.ObjectRepository.Page`.
 
 Por ejemplo, el servicio puede exponer una tarea para consultar un estudiante:
 
@@ -517,7 +561,7 @@ List<Estudiante> porPromedio = repo.findAll(
 Consulta una página ordenada por código:
 
 ```java
-import co.edu.cecar.app.repository.ObjectRepository.Page;
+import co.edu.cecar.objectrepository.ObjectRepository.Page;
 
 Page<Estudiante> pagina = repo.findAll(
         0, 2, Comparator.comparing(Estudiante::getCodigo));
@@ -571,9 +615,9 @@ practica.deleteAll(aEliminar);
 Las excepciones propias se importan desde `ObjectRepository`:
 
 ```java
-import co.edu.cecar.app.repository.ObjectRepository.DuplicateEntityException;
-import co.edu.cecar.app.repository.ObjectRepository.EntityNotFoundException;
-import co.edu.cecar.app.repository.ObjectRepository.StorageException;
+import co.edu.cecar.objectrepository.ObjectRepository.DuplicateEntityException;
+import co.edu.cecar.objectrepository.ObjectRepository.EntityNotFoundException;
+import co.edu.cecar.objectrepository.ObjectRepository.StorageException;
 ```
 
 Ejemplo de manejo de un ID duplicado en la UI, donde ya existe la variable `servicio`:
