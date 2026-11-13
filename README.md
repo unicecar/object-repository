@@ -178,7 +178,7 @@ Si elegiste el código fuente, verás además el paquete `co.edu.cecar.objectrep
 
 Existe un plugin para NetBeans llamado **ObjectRepositoryManager** que permite gestionar desde el IDE los archivos binarios de `ObjectRepository`.
 
-**Descarga:** [ObjectRepositoryManager-1.0.nbm](https://github.com/unicecar/ObjectRepositoryManager/blob/main/target/nbm/ObjectRepositoryManager-1.0.nbm).
+**Descarga:** [ObjectRepositoryManager-1.0.nbm](https://github.com/unicecar/object-repository-manager/blob/main/target/nbm/ObjectRepositoryManager-1.0.nbm).
 
 El archivo `.nbm` es el paquete de instalación del plugin. Se instala una vez en NetBeans, de forma independiente del JAR de `ObjectRepository` que agregas a tu aplicación.
 
@@ -192,7 +192,7 @@ Para instalarlo:
 6. Reinicia NetBeans si el asistente lo solicita.
 7. Abre el proyecto Java cuyos archivos binarios deseas gestionar.
 
-Puedes consultar el código y la documentación del plugin en [ObjectRepositoryManager en GitHub](https://github.com/unicecar/ObjectRepositoryManager).
+Puedes consultar el código y la documentación del plugin en [ObjectRepositoryManager en GitHub](https://github.com/unicecar/object-repository-manager).
 
 ## 3. Crear la entidad `Estudiante`
 
